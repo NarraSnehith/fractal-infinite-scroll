@@ -137,4 +137,3 @@ This allows efficient loading of large datasets using **pagination and infinite 
 - MongoDB
 - Mongoose
 
-Save the file.
