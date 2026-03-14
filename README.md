@@ -1,23 +1,48 @@
-# Infinite Scroll Activity Feed
+# Infinite Scroll Activity Feed (MEVN Stack)
 
-This project implements an infinite scroll activity feed using:
+This project implements an **Infinite Scroll Activity Feed** using:
 
-- Vue.js (Frontend)
-- Node.js + Express (Backend)
-- MongoDB (Database)
+- **Frontend:** Vue.js
+- **Backend:** Node.js + Express
+- **Database:** MongoDB
 
-## Project Structure
+The feed loads activity cards dynamically as the user scrolls down.
 
-backend → Node.js API server  
-frontend → Vue application  
+---
 
-## Setup Instructions
+# Project Structure
 
-### Start MongoDB
+fractal-infinite-scroll
+│
+├── backend
+│   ├── models
+│   ├── routes
+│   ├── server.js
+│   └── seed.js
+│
+├── frontend
+│   └── Vue application
+│
+└── README.md
+
+---
+
+# Setup Instructions
+
+## 1. Start MongoDB
+
+Run MongoDB locally:
+
 
 mongod --dbpath ~/mongodb-data
 
-### Start Backend
+
+---
+
+## 2. Run Backend Server
+
+Open a new terminal:
+
 
 cd backend
 npm install
@@ -25,28 +50,91 @@ node seed.js
 node server.js
 
 Backend runs on:
+
+
 http://localhost:5000
 
-### Start Frontend
+
+Test API:
+
+
+http://localhost:5000/api/feed
+
+
+---
+
+## 3. Run Frontend
+
+Open another terminal:
+
 
 cd frontend
 npm install
 npm run dev
 
+
 Frontend runs on:
+
+
 http://localhost:5173
 
-## API Endpoint
 
-GET /api/feed
+---
 
-Returns activity records from MongoDB.
+# Infinite Scroll Functionality
 
-## Data Flow
+The feed loads **10 activity items at a time**.
 
-1. Vue frontend requests `/api/feed`
-2. Node.js backend receives request
-3. Backend queries MongoDB
-4. MongoDB returns activity data
-5. Backend sends JSON response
-6. Vue renders activity cards
+When the user scrolls to the bottom:
+1. The frontend requests more data from the backend
+2. The backend queries MongoDB
+3. The next set of activities is returned
+4. Vue appends them to the feed
+
+---
+
+# API Endpoint
+
+GET
+
+
+/api/feed
+
+
+Returns activity feed items from MongoDB.
+
+Example Response:
+
+
+[
+{ "title": "Activity 1", "description": "This is activity number 1" },
+{ "title": "Activity 2", "description": "This is activity number 2" }
+]
+
+
+---
+
+# Data Flow Explanation
+
+The data flow between frontend and backend works as follows:
+
+1. Vue frontend sends a request to `/api/feed`.
+2. The Node.js backend receives the request using Express routes.
+3. The backend queries MongoDB using Mongoose.
+4. MongoDB returns activity records.
+5. The backend sends the data as JSON.
+6. Vue renders the activity cards and appends them to the feed.
+
+This allows efficient loading of large datasets using **pagination and infinite scroll**.
+
+---
+
+# Technologies Used
+
+- Vue.js
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+
+Save the file.
